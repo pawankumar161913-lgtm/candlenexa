@@ -1,0 +1,20 @@
+# python
+.venv/
+__pycache__/
+*.pyc
+backend/.env
+backend/*.db
+backend/test_*.db
+
+# node
+node_modules/
+frontend/dist/
+frontend/.env
+
+# misc
+.DS_Store
+*.log
+
+# local sqlite (dev only)
+candlenexa.db
+test_candlenexa.db

@@ -1,0 +1,11 @@
+# never deploy local secrets or junk
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+*.db
+test_*.db
+node_modules/
+dist/
+.git/

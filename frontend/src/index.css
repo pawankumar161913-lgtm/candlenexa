@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-ink-950 text-slate-200 font-sans antialiased;
+    background-image:
+      radial-gradient(1200px 600px at 15% -10%, rgba(139, 92, 246, 0.12), transparent 60%),
+      radial-gradient(900px 500px at 95% 0%, rgba(34, 211, 238, 0.07), transparent 55%);
+    background-attachment: fixed;
+  }
+  ::selection {
+    @apply bg-ai/40 text-white;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    @apply bg-ink-600 rounded-full;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  input,
+  select,
+  textarea {
+    @apply bg-ink-850 border border-ink-600 rounded-lg px-3 py-2 text-slate-100 placeholder-slate-500
+      outline-none transition focus:border-ai focus:ring-2 focus:ring-ai/25;
+  }
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-ink-900/80 border border-ink-700 rounded-2xl shadow-card backdrop-blur;
+  }
+  .card-hover {
+    @apply transition duration-200 hover:border-ink-500 hover:bg-ink-850/90;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold
+      transition duration-150 focus:outline-none focus:ring-2 focus:ring-ai/40 disabled:opacity-50
+      disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-ai text-white hover:bg-ai-soft shadow-glow;
+  }
+  .btn-ghost {
+    @apply btn bg-ink-800 text-slate-200 border border-ink-600 hover:bg-ink-700;
+  }
+  .btn-bull {
+    @apply btn bg-bull/15 text-bull border border-bull/40 hover:bg-bull/25;
+  }
+  .btn-bear {
+    @apply btn bg-bear/15 text-bear border border-bear/40 hover:bg-bear/25;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold
+      uppercase tracking-wide border;
+  }
+  .label {
+    @apply block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5;
+  }
+  .stat {
+    @apply text-2xl font-bold text-white tabular-nums;
+  }
+  .stat-sm {
+    @apply text-lg font-semibold text-white tabular-nums;
+  }
+  .muted {
+    @apply text-sm text-slate-400;
+  }
+  .mono {
+    @apply font-mono tabular-nums;
+  }
+  .table-base {
+    @apply w-full text-sm;
+  }
+  .table-base th {
+    @apply text-left text-[11px] font-semibold uppercase tracking-wider text-slate-500 pb-2;
+  }
+  .table-base td {
+    @apply py-2.5 border-t border-ink-700/70;
+  }
+  .skeleton {
+    @apply relative overflow-hidden bg-ink-800 rounded-lg;
+  }
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full animate-shimmer;
+    background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  }
+  .link {
+    @apply text-ai-cyan hover:underline underline-offset-4;
+  }
+}

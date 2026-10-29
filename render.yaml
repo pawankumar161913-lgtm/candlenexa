@@ -1,0 +1,51 @@
+services:
+  # ---------------- Backend API (FastAPI) ----------------
+  - type: web
+    name: candlenexa-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: MARKET_DATA_PROVIDER
+        value: twelve_data
+      - key: TWELVE_DATA_API_KEY
+        sync: false # set in the Render dashboard (keep secret!)
+      - key: TWELVE_DATA_BASE_URL
+        value: https://api.twelvedata.com
+      - key: PROVIDER_MIN_INTERVAL_SECONDS
+        value: "8"
+      - key: PROVIDER_DAILY_CREDIT_BUDGET
+        value: "700"
+      - key: CACHE_TTL_SECONDS
+        value: "60"
+      - key: SERIES_CACHE_TTL_SECONDS
+        value: "300"
+      - key: ANALYSIS_CACHE_TTL_SECONDS
+        value: "180"
+      - key: RATE_LIMIT_PER_MINUTE
+        value: "120"
+      - key: RATE_LIMIT_AUTH_PER_MINUTE
+        value: "20"
+      - key: ENV
+        value: production
+      # CORS_ORIGINS is set after the frontend is live, e.g.
+      # https://candlenexa.onrender.com,https://<you>.github.io
+
+  # ---------------- Frontend (static site) ----------------
+  - type: web
+    name: candlenexa
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    plan: free
+    # VITE_API_BASE must point at the deployed API, e.g.
+    # https://candlenexa-api.onrender.com/api
+    envVars:
+      - key: VITE_API_BASE
+        sync: false # set in the Render dashboard after the API is live
