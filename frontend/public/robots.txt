@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Block API internals and auth pages from indexing
+Disallow: /api/
